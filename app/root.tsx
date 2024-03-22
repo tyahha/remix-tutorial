@@ -7,7 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
   Outlet, Link,
-  useLoaderData,
+  useLoaderData, NavLink,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 import appStylesHref from "./app.css";
@@ -61,7 +61,8 @@ export default function App() {
               <ul>
                 {contacts.map((contact) => (
                   <li key={contact.id}>
-                    <Link to={`contacts/${contact.id}`}>
+                    <NavLink to={`contacts/${contact.id}`}
+                     className={({isActive, isPending}) => isActive ? "active" : isPending ? "pending" : ""}>
                       {contact.first || contact.last ? (
                         <>
                           {contact.first} {contact.last}
@@ -72,7 +73,7 @@ export default function App() {
                       {contact.favorite ? (
                         <span>★</span>
                       ) : null}
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>
